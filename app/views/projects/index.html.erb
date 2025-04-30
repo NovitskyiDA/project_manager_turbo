@@ -1,0 +1,21 @@
+<h1>Projects</h1>
+
+<%= turbo_frame_tag "projects" do %>
+  <ul>
+    <% @projects.each do |project| %>
+      <%= turbo_frame_tag dom_id(project) do %>
+        <li>
+          <%= link_to "#{project.name} (#{project.tasks_count} tasks)", project_path(project), data: { turbo_frame: "project_details" } %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <div class="pagination">
+    <%= paginate @projects, params: { turbo_frame: "projects" } %>
+  </div>
+<% end %>
+
+<%= turbo_frame_tag "project_details" do %>
+  <p>Select a project to view its tasks.</p>
+<% end %>

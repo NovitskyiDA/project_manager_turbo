@@ -1,0 +1,9 @@
+<%= turbo_frame_tag dom_id(task) do %>
+  <li>
+    <%= form_with(model: [project, task], method: :patch, data: { controller: "edit", action: "blur->edit#submit", turbo_frame: dom_id(task) }) do |form| %>
+      <%= form.text_field :name, value: task.name, data: { edit_target: "input" } %>
+    <% end %>
+
+    <%= button_to "Delete", project_task_path(project, task), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+  </li>
+<% end %>
